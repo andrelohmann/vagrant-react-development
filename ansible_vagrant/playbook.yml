@@ -94,56 +94,56 @@
 
     when: stat_result.stat.exists == False
 
-  # # npm start generally autoreloads the browser, whenever a file is changed
-  # # however, this feature does not work by default, when a file is changed
-  # # outside the vagrant machine (e.g. within the shared folder on your host system)
-  # # to allow autoreload in vagrant as well, a ".env" file needs to be created with content
-  # # CHOKIDAR_USEPOLLING=true
-  # - name: check for .env in application folder
-  #   stat:
-  #     path:
-  #   register: stat_result
-  #
-  # - name: create .env file to allow autoreload
-  #   copy:
-  #     dest: "/home/vagrant/application/.env"
-  #     content: |
-  #       CHOKIDAR_USEPOLLING=true
-  #   when: stat_result.stat.exists == False
-  #
-  # # build the project
-  # - name: build the project
-  #   shell: npm run build
-  #   args:
-  #     executable: /bin/bash
-  #     chdir: /home/vagrant/application/
-  #   become: yes
-  #   become_user: vagrant
-  #
-  # # build and run the docker image
-  # - name: create docker image from build
-  #   shell: docker build -t react-app .
-  #   args:
-  #     executable: /bin/bash
-  #     chdir: /home/vagrant/application/
-  #   #become: yes
-  #   #become_user: vagrant
-  #
-  # - name: run the docker image as a daemon
-  #   shell: docker run -d -p 80:80 react-app
-  #   args:
-  #     executable: /bin/bash
-  #     chdir: /home/vagrant/application/
-  #   #become: yes
-  #   #become_user: vagrant
-  #
-  # # start react autoreload service in the background
-  # - name: start react autoreload server
-  #   shell: nohup npm start &
-  #   args:
-  #     executable: /bin/bash
-  #     chdir: /home/vagrant/application/
-  #   become: yes
-  #   become_user: vagrant
+  # npm start generally autoreloads the browser, whenever a file is changed
+  # however, this feature does not work by default, when a file is changed
+  # outside the vagrant machine (e.g. within the shared folder on your host system)
+  # to allow autoreload in vagrant as well, a ".env" file needs to be created with content
+  # CHOKIDAR_USEPOLLING=true
+  - name: check for .env in application folder
+    stat:
+      path:
+    register: stat_result
+
+  - name: create .env file to allow autoreload
+    copy:
+      dest: "/home/vagrant/application/.env"
+      content: |
+        CHOKIDAR_USEPOLLING=true
+    when: stat_result.stat.exists == False
+
+  # build the project
+  - name: build the project
+    shell: npm run build
+    args:
+      executable: /bin/bash
+      chdir: /home/vagrant/application/
+    become: yes
+    become_user: vagrant
+
+  # build and run the docker image
+  - name: create docker image from build
+    shell: docker build -t react-app .
+    args:
+      executable: /bin/bash
+      chdir: /home/vagrant/application/
+    #become: yes
+    #become_user: vagrant
+
+  - name: run the docker image as a daemon
+    shell: docker run -d -p 80:80 react-app
+    args:
+      executable: /bin/bash
+      chdir: /home/vagrant/application/
+    #become: yes
+    #become_user: vagrant
+
+  # start react autoreload service in the background
+  - name: start react autoreload server
+    shell: nohup npm start &
+    args:
+      executable: /bin/bash
+      chdir: /home/vagrant/application/
+    become: yes
+    become_user: vagrant
 
 ...
