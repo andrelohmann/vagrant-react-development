@@ -1,4 +1,4 @@
-# vagrant-react-development
+# vagrant-shopify-app
 (c) Andre Lohmann (and others) 2019
 
 ## Maintainer Contact
@@ -7,7 +7,7 @@
 
 ## content
 
-Vagrant template, to deploy a fully functioning react development environment.
+Vagrant template, to run the shopify tutorial at https://developers.shopify.com/tutorials/build-a-shopify-app-with-node-and-react/set-up-your-app
 
 ## Usage
 

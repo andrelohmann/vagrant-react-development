@@ -2,6 +2,6 @@
 configs:
   memory: "2048"
   cpus: "4"
-  ip: "192.168.157.57"
-  domain: frontend.lokal
+  ip: "192.168.175.57"
+  domain: shopify.lokal
 ...
